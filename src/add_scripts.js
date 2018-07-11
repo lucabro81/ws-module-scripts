@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 let fs = require('fs');
 let cp = require('child_process');
 
