@@ -26,20 +26,21 @@ let counter_scripts = 0;
 
 for (let i = 0; i < package_json_arr.length; i++) {
     if (package_json_arr[i].includes("scripts")) {
+        package_json_mod += package_json_arr[i] + "\n";
         scripts_found = true;
     }
     else if (scripts_found) {
         if (package_json_arr[i].includes("}")) {
 
             package_json_mod +=
-                "\t\t\"add-web-service\": \"add_web_service\"\n" +
+                "\t\t\"add-web-service\": \"add_web_service\",\n" +
                 "\t\t\"mod-web-service\": \"mod_web_service\"\n" +
                 "\t}\n";
             scripts_found = false;
 
         }
         else if (counter_scripts > 0) {
-            package_json_mod += ",\n"
+            package_json_mod +=  package_json_arr[i] + ",\n"
         }
     }
     else {
