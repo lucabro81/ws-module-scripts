@@ -20,12 +20,14 @@ for (let i = 0; i < current_path_arr.length; i++) {
     }
 }
 
-// let package_json = require(process.cwd() + "/" + "package.json");
-
 console.log("local_path: ", local_path);
 
-// package_json["scripts"]["scriptaggiunto"] = "assd";
+let package_json = require(local_path);
 
-// fs.writeFileSync(process.cwd() + "/" + "package.json", package_json, 'utf8');
+console.log("package_json: ", package_json);
+
+package_json["scripts"]["scriptaggiunto"] = "assd";
+
+fs.writeFileSync(process.cwd() + "/" + "package.json", JSON.stringify(package_json), 'utf8');
 
 process.exit();
