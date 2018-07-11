@@ -6,8 +6,10 @@ let cp = require('child_process');
 let current_path_arr = process.cwd().split("/");
 let local_path = [];
 
+console.log("current_path_arr: ", current_path_arr);
+
 for (let i = 0; i < current_path_arr.length; i++) {
-    if (current_path_arr[i] === "node_modules") {
+    if (current_path_arr[i] !== "node_modules") {
         local_path.push(current_path_arr[i]);
     }
     else {
