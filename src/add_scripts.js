@@ -22,19 +22,27 @@ let package_json_arr = package_json.split('\n');
 let package_json_mod = "";
 
 let scripts_found = false;
+let counter_scripts = 0;
 
 for (let i = 0; i < package_json_arr.length; i++) {
     if (package_json_arr[i].includes("scripts")) {
         scripts_found = true;
     }
     else if (scripts_found && package_json_arr[i].includes("}")) {
-        package_json_mod +=
-            "\t\t\"add-web-service\": \"add_web_service\"\n" +
-            "\t\t\"mod-web-service\": \"mod_web_service\"\n" +
-            "\t}\n";
+        if (counter_scripts > 0) {
+            package_json_mod += ",\n"
+        }
+        else {
+            package_json_mod +=
+                "\t\t\"add-web-service\": \"add_web_service\"\n" +
+                "\t\t\"mod-web-service\": \"mod_web_service\"\n" +
+                "\t}\n";
+            scripts_found = false;
+        }
     }
     else {
-        package_json_mod += package_json_arr[i];
+        package_json_mod += package_json_arr[i] + "\n";
+        counter_scripts++;
     }
 }
 
