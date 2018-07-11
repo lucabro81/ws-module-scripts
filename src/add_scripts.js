@@ -33,8 +33,8 @@ for (let i = 0; i < package_json_arr.length; i++) {
         if (package_json_arr[i].includes("}")) {
 
             package_json_mod +=
-                "\t\t\"add-web-service\": \"add_web_service\",\n" +
-                "\t\t\"mod-web-service\": \"mod_web_service\"\n" +
+                "\t\t\"add-web-service\": \"add-web-service\",\n" +
+                "\t\t\"mod-web-service\": \"mod-web-service\"\n" +
                 "\t},\n";
             scripts_found = false;
 
