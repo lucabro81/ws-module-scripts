@@ -5,7 +5,7 @@ let cp = require('child_process');
 
 let package_json = require(process.cwd() + "/" + "package.json");
 
-console.log(process.cwd() + "/" + "package.json", INIT_CWD);
+console.log(process.cwd() + "/" + "package.json");
 
 package_json["scripts"]["scriptaggiunto"] = "assd";
 
