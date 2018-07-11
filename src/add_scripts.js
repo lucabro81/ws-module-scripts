@@ -25,7 +25,7 @@ let scripts_found = false;
 let counter_scripts = 0;
 
 for (let i = 0; i < package_json_arr.length; i++) {
-    if (package_json_arr[i].includes("scripts")) {
+    if (package_json_arr[i].includes("\t\"scripts\": {\n")) {
         package_json_mod += package_json_arr[i] + "\n";
         scripts_found = true;
     }
@@ -35,7 +35,7 @@ for (let i = 0; i < package_json_arr.length; i++) {
             package_json_mod +=
                 "\t\t\"add-web-service\": \"add_web_service\",\n" +
                 "\t\t\"mod-web-service\": \"mod_web_service\"\n" +
-                "\t}\n";
+                "\t},\n";
             scripts_found = false;
 
         }
