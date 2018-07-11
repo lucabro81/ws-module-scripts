@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "post-install": "node .src/add_scripts.js"
+    "post-install": "node ./src/add_scripts.js"
   },
   "files": [
     "src/"
