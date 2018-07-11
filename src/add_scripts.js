@@ -25,7 +25,7 @@ let scripts_found = false;
 let counter_scripts = 0;
 
 for (let i = 0; i < package_json_arr.length; i++) {
-    if (package_json_arr[i].includes("\t\"scripts\": {\n")) {
+    if (package_json_arr[i].includes("\"scripts\":")) {
         package_json_mod += package_json_arr[i] + "\n";
         scripts_found = true;
     }
