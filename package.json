@@ -1,10 +1,10 @@
 {
   "name": "ws-module-scripts",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "post-install": "node ./src/add_scripts.js"
+    "postinstall": "node ./src/add_scripts.js"
   },
   "files": [
     "src/"
