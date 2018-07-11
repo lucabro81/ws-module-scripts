@@ -21,7 +21,7 @@ for (let i = 0; i < current_path_arr.length; i++) {
 
 console.log("local_path: ", local_path);
 
-package_json["scripts"]["scriptaggiunto"] = "assd";
+// package_json["scripts"]["scriptaggiunto"] = "assd";
 
 // fs.writeFileSync(process.cwd() + "/" + "package.json", package_json, 'utf8');
 
