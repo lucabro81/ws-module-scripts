@@ -1,19 +1,23 @@
 {
   "name": "ws-module-scripts",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "post-install": ""
+    "post-install": "add-scripts"
   },
+  "files": [
+    "src/"
+  ],
   "config": {
     "basePath": "src/",
     "endpoints": "LocalEndPoints.ts",
     "services": "services/web/"
   },
   "bin": {
-    "add-web-service": "package/scripts/add_web_service.js",
-    "mod-web-service": "package/scripts/mod_web_service.js"
+    "add-web-service": "src/add_web_service.js",
+    "mod-web-service": "src/mod_web_service.js",
+    "add-scripts": "src/add_scripts.js"
   },
   "dependencies": {
     "child_process": "^1.0.2",
