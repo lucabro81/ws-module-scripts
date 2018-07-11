@@ -5,4 +5,6 @@ let package_json = require(process.cwd() + "/" + "package.json");
 
 package_json["scripts"]["scriptaggiunto"] = "assd";
 
+fs.writeFileSync(process.cwd() + "/" + "package.json", package_json, 'utf8');
 
+process.exit();
