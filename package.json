@@ -1,0 +1,26 @@
+{
+  "name": "ws-module-scripts",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "post-install": ""
+  },
+  "config": {
+    "basePath": "src/",
+    "endpoints": "LocalEndPoints.ts",
+    "services": "services/web/"
+  },
+  "bin": {
+    "add-web-service": "package/scripts/add_web_service.js",
+    "mod-web-service": "package/scripts/mod_web_service.js"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "fs": "0.0.1-security",
+    "typescript": "^2.8.3",
+    "typescript-require": "^0.2.10"
+  },
+  "author": "Luca Brognara",
+  "license": "ISC"
+}
