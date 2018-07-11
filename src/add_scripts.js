@@ -3,9 +3,23 @@
 let fs = require('fs');
 let cp = require('child_process');
 
-let package_json = require(process.cwd() + "/" + "package.json");
+let current_path_arr = process.cwd().split("/");
+let local_path = [];
 
-console.log(process.cwd() + "/" + "package.json");
+for (let i = 0; i < path_arr.length; i++) {
+    if (path_arr[i] === "node_modules") {
+        local_path.push(path_arr[i]);
+    }
+    else {
+        local_path.push("package.json");
+        local_path.join("/");
+        break;
+    }
+}
+
+// let package_json = require(process.cwd() + "/" + "package.json");
+
+console.log("local_path: ", local_path);
 
 package_json["scripts"]["scriptaggiunto"] = "assd";
 
