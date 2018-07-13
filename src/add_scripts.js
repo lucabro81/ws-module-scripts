@@ -49,6 +49,17 @@ for (let i = 0; i < package_json_arr.length; i++) {
     }
 }
 
+// se il nodo scripts non è stato trova lo aggiungiamo
+if (!package_json_mod.includes("scripts")) {
+    let l = package_json_arr.length;
+    package_json_arr.splice(l-2, 0,
+        "\t\"scripts\": {\n" +
+        "\t\t\"add-web-service\": \"add-web-service\",\n" +
+        "\t\t\"mod-web-service\": \"mod-web-service\"\n" +
+        "\t}\n");
+    package_json_mod += package_json_arr.join("");
+}
+
 fs.writeFileSync(local_path, package_json_mod, 'utf8');
 
 process.exit();
