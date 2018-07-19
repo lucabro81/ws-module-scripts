@@ -74,7 +74,7 @@ function saveEndpoints() {
     fs.writeFileSync(path_no_name + "/endpoints.json", JSON.stringify(endpoints, null, "\t"), 'utf8');
     // TODO: valutare se creare anche il EndPointVO
 
-    let endpoints_template = fs.readFileSync(process.cwd() + '/templates/endpoints.template.txt', 'utf8');
+    let endpoints_template = fs.readFileSync(require('./templates/endpoints.template.txt'));
     let endpoints_template_result = {value: ""};
     let endpoints_template_line_arr = endpoints_template.split('\n');
 
