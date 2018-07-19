@@ -29,7 +29,11 @@ function addProperties() {
             case "string":
                 endpoint_obj[key] = val_prop;
                 break;
-            case "number": parseInt(val_prop);
+            case "number":
+                endpoint_obj[key] = parseInt(val_prop);
+                break;
+            case "boolean":
+                endpoint_obj[key] = val_prop.toLowerCase() === 'true'; // TODO: controllo dato
                 break;
         }
 
@@ -63,18 +67,20 @@ function addProperties() {
  * salva sia il ts che un json che lo descrive
  */
 function saveEndpoints() {
-    let path_no_name = utils.path_endpoints.split("/").splice(-1, 1).join("/"); // forse non ha il trailing slash, verificare
+    let path_endpoints_arr = utils.path_endpoints.split("/");
+    path_endpoints_arr.splice(-1, 1);
+
+    let path_no_name = path_endpoints_arr.join("/"); // forse non ha il trailing slash, verificare
     fs.writeFileSync(path_no_name + "/endpoints.json", JSON.stringify(endpoints, null, "\t"), 'utf8');
     // TODO: valutare se creare anche il EndPointVO
 
-    let endpoints_template = fs.readFileSync('./scripts/templates/endpoints.template.txt', 'utf8');
+    let endpoints_template = fs.readFileSync(process.cwd() + '/templates/endpoints.template.txt', 'utf8');
     let endpoints_template_result = {value: ""};
     let endpoints_template_line_arr = endpoints_template.split('\n');
 
     let l = endpoints_template_line_arr.length;
     for (let j = 0; j < l; j++) {
         let line = endpoints_template_line_arr[j];
-        let line_mod;
 
         if (line.includes('</')) {
             let i = 1;
@@ -86,17 +92,19 @@ function saveEndpoints() {
             }
 
             let block_mod = "";
-            for (let name in endpoints) {
+            for (let key in endpoints) {
                 if (endpoints.hasOwnProperty(key)) {
                     let endpoint = endpoints[key];
 
                     block_mod = block.replace(placeholders.endpoint_name, key.toUpperCase());
                     block_mod = block_mod.replace(placeholders.endpoint_obj, JSON.stringify(endpoint, null, "\t\t").slice(1,-1));
 
+                    endpoints_template_result.value += block_mod + "\n";
                 }
+
             }
 
-            endpoints_template_result.value += block_mod + "\n\n";
+
 
             j = j + i;
         }
@@ -105,7 +113,7 @@ function saveEndpoints() {
         }
     }
 
-    fs.writeFileSync(utils.path_endpoints, endpoints_template_result, 'utf8');
+    fs.writeFileSync(utils.path_endpoints, endpoints_template_result.value, 'utf8');
 }
 
 function addEndpoint() {
@@ -118,7 +126,7 @@ function addEndpoint() {
 }
 
 stdin.resume();
-stdout.write("Dove vuoi creare il file EndPoints.ts? ('" + utils.path_endpoints + "): ");
+stdout.write("Dove vuoi creare il file EndPoints.ts? ('" + utils.path_endpoints + "'): ");
 
 stdin.once('data', function(data) {
     let path = data.toString().trim();
