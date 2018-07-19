@@ -1,13 +1,13 @@
 
 const utils = exports;
 
-// utils.base_path = process.cwd() + "/" + process.env.npm_package_config_basePath;
-// utils.path_services = utils.base_path + process.env.npm_package_config_services;
-// utils.path_endpoints = utils.base_path + process.env.npm_package_config_endpoints;
-//
-utils.base_path = process.cwd() + "/dist";
-utils.path_services = utils.base_path + "/services";
-utils.path_endpoints = utils.base_path + "/utils/Endpoints.ts";
+utils.base_path = process.cwd() + "/" + process.env.npm_package_config_basePath;
+utils.path_services = utils.base_path + process.env.npm_package_config_services;
+utils.path_endpoints = utils.base_path + process.env.npm_package_config_endpoints;
+
+// utils.base_path = process.cwd() + "/dist";
+// utils.path_services = utils.base_path + "/services";
+// utils.path_endpoints = utils.base_path + "/utils/Endpoints.ts";
 
 console.log("process.env.npm_package_config_basePath", process.env.npm_package_config_basePath);
 console.log("process.env.npm_package_config_services", process.env.npm_package_config_services);
