@@ -1,3 +1,3 @@
 {
-  "txt": "import { EndPointVO } from \"../vo/EndPointVO\";\nimport { CacheEndPoint, WarningLevel } from \"./Emun\";\n\nexport class EndPoints {\n\n\t</\n\tstatic {endpoint_name}:EndPointVO = {\n\t\t{endpoint_obj}\n\t};\n\t/>\n\t//--//\n\n}"
+  "txt": "import { EndPointVO } from \"./EndPointVO\";\nimport { CacheEndPoint, WarningLevel } from \"./Emun\";\n\nexport class EndPoints {\n\n\t</\n\tstatic {endpoint_name}:EndPointVO = {\n{endpoint_obj}\n\t};\n\t/>\n\t//--//\n\n}"
 }

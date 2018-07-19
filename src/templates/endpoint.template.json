@@ -1,8 +1,8 @@
 {
   "url": "string",
-  "warning_level": "number",
-  "access": "boolean",
+  "warning_level": "WarningLevel",
   "cache": "boolean",
+  "access": "boolean",
   "refresh": "boolean",
   "retry": "number",
   "method": "string",

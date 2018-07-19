@@ -32,6 +32,14 @@ function addProperties() {
             case "number":
                 endpoint_obj[key] = parseInt(val_prop);
                 break;
+            case "WarningLevel":
+                let number = parseInt(val_prop);
+                let warning_levels = ["WarningLevel.SILENT", "WarningLevel.LOW", "WarningLevel.MEDIUM", "WarningLevel.HIGH"];
+                if (number >= 4 && number < 0) {
+                    number = 1;
+                }
+                endpoint_obj[key] = warning_levels[number];
+                break;
             case "boolean":
                 endpoint_obj[key] = val_prop.toLowerCase() === 'true'; // TODO: controllo dato
                 break;
@@ -70,13 +78,15 @@ function saveEndpoints() {
     let path_endpoints_arr = utils.path_endpoints.split("/");
     path_endpoints_arr.splice(-1, 1);
 
+    // creazione del json che descrive gli endpoints
+
     let path_no_name = path_endpoints_arr.join("/"); // forse non ha il trailing slash, verificare
     fs.writeFileSync(path_no_name + "/endpoints.json", JSON.stringify(endpoints, null, "\t"), 'utf8');
-    // TODO: valutare se creare anche il EndPointVO
+
+    // creazione della classe ts degli endpoints
 
     let endpoints_template = require('./templates/endpoints.template.json').txt;
-    // console.log("endpoints_template", endpoints_template);
-    let endpoints_template_result = {value: ""};
+    let endpoints_template_result = { value: "" };
     let endpoints_template_line_arr = endpoints_template.split('\n');
 
     let l = endpoints_template_line_arr.length;
@@ -98,14 +108,27 @@ function saveEndpoints() {
                     let endpoint = endpoints[key];
 
                     block_mod = block.replace(placeholders.endpoint_name, key.toUpperCase());
-                    block_mod = block_mod.replace(placeholders.endpoint_obj, JSON.stringify(endpoint, null, "\t\t").slice(1,-1));
+
+                    let body = "";
+                    for (let key in endpoint) {
+                        if (endpoint.hasOwnProperty(key)) {
+
+                            let value = endpoint[key];
+                            if (endpoint_template[key] === "string") {
+                                body += "\t\t" + key + ": \"" + value + "\",\n";
+                            }
+                            else {
+                                body += "\t\t" + key + ": " + value + ",\n";
+                            }
+
+                        }
+                    }
+                    block_mod = block_mod.replace(placeholders.endpoint_obj, body);
 
                     endpoints_template_result.value += block_mod + "\n";
                 }
 
             }
-
-
 
             j = j + i;
         }
@@ -115,6 +138,24 @@ function saveEndpoints() {
     }
 
     fs.writeFileSync(utils.path_endpoints, endpoints_template_result.value, 'utf8');
+
+    // creazione dell'EndPointVO.d.ts
+
+    let vo = require('./templates/endpointvo.template.json').txt;
+    let body = "";
+
+    for (let key in endpoint_template) {
+        if (endpoint_template.hasOwnProperty(key)) {
+
+            let vo_type = endpoint_template[key];
+            body += "\t" + key + ": " + vo_type + ";\n";
+        }
+    }
+
+    vo = vo.replace(placeholders.endpoint_obj, body);
+
+    fs.writeFileSync(path_no_name + "/EndPointVO.d.ts", vo, 'utf8');
+
 }
 
 function addEndpoint() {
