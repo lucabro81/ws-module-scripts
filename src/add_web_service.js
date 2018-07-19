@@ -3,6 +3,7 @@
 require("typescript-require");
 
 let utils = require("./utils");
+let placeholders = require("./placeholders");
 
 let fs = require('fs');
 let path = require('path');

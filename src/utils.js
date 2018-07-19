@@ -5,6 +5,10 @@ utils.base_path = process.cwd() + "/" + process.env.npm_package_config_basePath;
 utils.path_services = utils.base_path + process.env.npm_package_config_services;
 utils.path_endpoints = utils.base_path + process.env.npm_package_config_endpoints;
 
+console.log("process.env.npm_package_config_basePath", process.env.npm_package_config_basePath);
+console.log("process.env.npm_package_config_services", process.env.npm_package_config_services);
+console.log("process.env.npm_package_config_endpoints", process.env.npm_package_config_endpoints);
+
 /**
  *
  * @param string
@@ -34,6 +38,64 @@ utils.objToArray = function(obj) {
 
     return array;
 
+};
+
+/**
+ * determina se la risposta data è positiva
+ *
+ * @param response
+ * @returns {boolean}
+ */
+utils.yes = function(response) {
+
+    let response_uc = response.toUpperCase();
+
+    return (response_uc === "SI") ||
+        (response_uc === "S") ||
+        (response_uc === "Y") ||
+        (response_uc === "YES") ||
+        (response_uc === "OK") ||
+        (response_uc === "TRUE") ||
+        (response_uc === "VERO") ||
+        (response_uc.includes("SI CAZZO")) ||
+        (response_uc.includes("FUCKYEAH!")) ||
+        (response_uc.includes("FUCK YEAH!"));
+};
+
+/**
+ * determina se la risposta data è negativa
+ *
+ * @param response
+ * @returns {boolean}
+ */
+utils.no = function(response) {
+
+    let response_uc = response.toUpperCase();
+
+    return (response_uc === "NO") ||
+        (response_uc === "N") ||
+        (response_uc === "NOPE") ||
+        (response_uc === "FALSE") ||
+        (response_uc === "FALSO") ||
+        (response_uc.includes("NO CAZZO")) ||
+        (response_uc.includes("FUCKNOPE!")) ||
+        (response_uc.includes("FUCK NOPE!"));
+};
+
+/**
+ * associa ad una risposta positiva true e a quella negativa false, qualunque altra risposta sarà false
+ *
+ * @param response
+ * @returns {boolean}
+ */
+utils.getResponse = function(response) {
+    if (utils.yes(response)) {
+        return true;
+    }
+    else if (utils.no(response)) {
+        return false;
+    }
+    return false;
 };
 
 /**
@@ -75,4 +137,4 @@ utils.createNameArray = function(index_metodi_arr, endpoint_arr) {
     });
 
     return nomi_metodi_arr;
-}
+};

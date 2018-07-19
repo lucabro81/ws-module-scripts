@@ -11,12 +11,13 @@
   ],
   "config": {
     "basePath": "src/",
-    "endpoints": "LocalEndPoints.ts",
+    "endpoints": "EndPoints.ts",
     "services": "services/web/"
   },
   "bin": {
     "add-web-service": "src/add_web_service.js",
-    "mod-web-service": "src/mod_web_service.js"
+    "mod-web-service": "src/mod_web_service.js",
+    "create-endpoints": "src/create_endpoints.js"
   },
   "dependencies": {
     "child_process": "^1.0.2",

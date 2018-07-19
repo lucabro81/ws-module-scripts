@@ -1,0 +1,10 @@
+{
+  "url": "string",
+  "warning_level": "number",
+  "access": "string",
+  "cache": "string",
+  "refresh": "string",
+  "retry": "number",
+  "method": "string",
+  "debounce": "number"
+}

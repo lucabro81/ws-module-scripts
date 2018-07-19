@@ -1,0 +1,12 @@
+import { EndPointVO } from "../vo/EndPointVO";
+import { CacheEndPoint, WarningLevel } from "./Emun";
+
+export class EndPoints {
+
+    </
+    static {endpoint_name}:EndPointVO = {
+        {endpoint_obj}
+    };
+    />
+
+}
