@@ -8,6 +8,9 @@ utils.path_endpoints = utils.base_path + process.env.npm_package_config_endpoint
 console.log("process.env.npm_package_config_basePath", process.env.npm_package_config_basePath);
 console.log("process.env.npm_package_config_services", process.env.npm_package_config_services);
 console.log("process.env.npm_package_config_endpoints", process.env.npm_package_config_endpoints);
+console.log("utils.base_path", utils.base_path);
+console.log("utils.path_services", utils.path_services);
+console.log("utils.path_endpoints", utils.path_endpoints);
 
 /**
  *

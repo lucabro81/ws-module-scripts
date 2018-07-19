@@ -118,12 +118,12 @@ function addEndpoint() {
 }
 
 stdin.resume();
-stdout.write("Dove vuoi creare il file EndPoints.ts? ('" + utils.base_path + "/utils/EndPoints.ts'): ");
+stdout.write("Dove vuoi creare il file EndPoints.ts? ('" + utils.path_endpoints + "): ");
 
 stdin.once('data', function(data) {
     let path = data.toString().trim();
-    if (path === "") {
-        path = utils.base_path + "/utils/";
+    if (path !== "") {
+        utils.path_endpoints = path;
     }
     addEndpoint();
 });

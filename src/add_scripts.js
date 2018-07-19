@@ -24,6 +24,8 @@ let package_json_mod = "";
 let scripts_found = false;
 let counter_scripts = 0;
 
+// FIXME: utilizzare JSON.stringify con i parametri aggiuntivi per la formattazione
+
 for (let i = 0; i < package_json_arr.length; i++) {
     if (package_json_arr[i].includes("\"scripts\":")) {
         package_json_mod += package_json_arr[i] + "\n";
