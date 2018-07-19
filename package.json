@@ -11,7 +11,7 @@
   ],
   "config": {
     "basePath": "src/",
-    "endpoints": "EndPoints.ts",
+    "endpoints": "utils/EndPoints.ts",
     "services": "services/web/"
   },
   "bin": {
