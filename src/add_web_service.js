@@ -13,8 +13,7 @@ let stdout = process.stdout;
 
 let path_endpoints_arr = utils.path_endpoints.split("/");
 path_endpoints_arr.splice(-1, 1);
-
-let endpoints_class = require(path_endpoints_arr.join("/"));
+let endpoints_class = require(path_endpoints_arr.join("/")+ "/endpoints.json");
 
 const base_path = utils.path_services;
 
