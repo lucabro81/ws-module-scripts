@@ -22,8 +22,7 @@
   "dependencies": {
     "child_process": "^1.0.2",
     "fs": "0.0.1-security",
-    "typescript": "^2.8.3",
-    "typescript-require": "^0.2.10"
+    "typescript": "^2.8.3"
   },
   "author": "Luca Brognara",
   "license": "ISC"

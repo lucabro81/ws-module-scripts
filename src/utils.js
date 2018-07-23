@@ -111,7 +111,7 @@ utils.getResponse = function(response) {
  * @returns {Array}
  */
 utils.askForEndpoints = function(endpoints_class, stdout) {
-    let endpoint_arr = utils.objToArray(endpoints_class.EndPoints);
+    let endpoint_arr = utils.objToArray(endpoints_class);
     let select_endpoint_question = "";
     select_endpoint_question += "Seleziona fra i seguenti gli endpoint con cui fare il web service:\n\n";
 
