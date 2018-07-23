@@ -123,13 +123,22 @@ stdin.once('data', function(data) {
 
         for (let i = 0; i < path_services_arr.length; i++) {
             let path_service_segment = path_services_arr[i];
-            let path_endpoints_segment = (path_endpoints_arr[i]) ? path_endpoints_arr[i] : null;
-            if (path_service_segment !== path_endpoints_segment) {
-                depth += "../";
+            console.log("path_service_segment", path_service_segment);
+            if (!path_endpoints_arr[i]) {
+                break;
+            }
+            else {
+                let path_endpoints_segment = path_endpoints_arr[i];
+                console.log("path_endpoints_segment", path_endpoints_segment);
+                if (path_service_segment !== path_endpoints_segment) {
+                    depth += "../";
+                    console.log("depth", depth);
+                }
             }
         }
 
-        let end_point_class = (depth + utils.path_endpoints[utils.path_endpoints.length - 1]).replace("ts", "");
+        let end_point_class = (depth + utils.path_endpoints).replace("ts", "");
+        console.log("end_point_class", end_point_class);
 
         service_template_result.value =
             service_template_result.value.replace(placeholders.ep_class_path, end_point_class);
