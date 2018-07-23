@@ -12,13 +12,6 @@ let stdin = process.stdin;
 let stdout = process.stdout;
 let endpoints_class = require(utils.path_endpoints);
 
-let re_mtd_1 = /{nome_mtd}/gi;
-let re_mtd_2 = /{nome_mtd_u}/gi;
-let re_srv_1 = /{nome_srv}/gi;
-let re_srv_2 = /{nome_srv_u}/gi;
-let endpoint_obj = /{endpoint_obj}/gi;
-let http_method = /{http_method}/gi;
-
 const base_path = utils.path_services;
 
   ///////////////////
@@ -39,10 +32,10 @@ function addModifiedText(nomi_metodi_arr, text, result, endpoint_arr, index_meto
 
     nomi_metodi_arr.forEach(function (nome, index) {
         nome = nome.replace('\n', '');
-        text_mod = text.replace(re_mtd_1, nome);
-        text_mod = text_mod.replace(re_mtd_2, utils.capitalizeFirstLetter(nome));
-        text_mod = text_mod.replace(endpoint_obj, "EndPoints." + endpoint_arr[parseInt(index_metodi_arr[index])].key);
-        text_mod = text_mod.replace(http_method, endpoint_arr[parseInt(index_metodi_arr[index])].obj.default_method);
+        text_mod = text.replace(placeholders.re_mtd_1, nome);
+        text_mod = text_mod.replace(placeholders.re_mtd_2, utils.capitalizeFirstLetter(nome));
+        text_mod = text_mod.replace(placeholders.endpoint_obj, "EndPoints." + endpoint_arr[parseInt(index_metodi_arr[index])].key);
+        text_mod = text_mod.replace(placeholders.http_method, endpoint_arr[parseInt(index_metodi_arr[index])].obj.default_method);
 
         if (text_mod.includes('-->')) {
             result.value += text_mod.replace('-->', '') + "\n";
@@ -80,11 +73,10 @@ stdin.once('data', function(data) {
         fs.mkdirSync(base_path + nome_classe + "/decorators");
 
         // popolo il service.template
-        let service_template_source = fs.readFileSync('./scripts/templates/service.template.txt', 'utf8');
         let service_template_result = {value: ""};
         let service_template_line_arr;
 
-        service_template_line_arr = service_template_source.split('\n');
+        service_template_line_arr = require('./templates/service.template.json').txt;
 
         let l = service_template_line_arr.length;
         // Per ogni riga del file service.template.txt ...
@@ -114,8 +106,8 @@ stdin.once('data', function(data) {
             }
             // ... sostituisci normalmente senza duplicare
             else {
-                line_mod = line.replace(re_srv_1, nome_classe);
-                line_mod = line_mod.replace(re_srv_2, utils.capitalizeFirstLetter(nome_classe));
+                line_mod = line.replace(placeholders.re_srv_1, nome_classe);
+                line_mod = line_mod.replace(placeholders.re_srv_2, utils.capitalizeFirstLetter(nome_classe));
                 service_template_result.value += line_mod + "\n";
             }
         }
@@ -126,11 +118,11 @@ stdin.once('data', function(data) {
         // creazione dei file che devono stare dentro a /decorators
         nomi_metodi_arr.forEach((name) => {
 
-            let service_method_signal_template = fs.readFileSync('./scripts/templates/serviceMethodSignalContainer.template.txt', 'utf8');
-            service_method_signal_template = service_method_signal_template.replace(re_srv_2, utils.capitalizeFirstLetter(name));
+            let service_method_signal_template = require('./templates/serviceMethodSignalContainer.template.json').txt.join('\n');
+            service_method_signal_template = service_method_signal_template.replace(placeholders.re_srv_2, utils.capitalizeFirstLetter(name));
 
-            let service_method_listener_template = fs.readFileSync('./scripts/templates/onServiceMethodListener.template.txt', 'utf8');
-            service_method_listener_template = service_method_listener_template.replace(re_srv_2, utils.capitalizeFirstLetter(name));
+            let service_method_listener_template = require('./templates/onServiceMethodListener.template.json').txt.join('\n');
+            service_method_listener_template = service_method_listener_template.replace(placeholders.re_srv_2, utils.capitalizeFirstLetter(name));
 
             fs.writeFileSync(base_path +
                 nome_classe + '/decorators/' + utils.capitalizeFirstLetter(name) + 'ServiceMethodSignalContainer.ts',

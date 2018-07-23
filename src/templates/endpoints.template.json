@@ -1,3 +1,17 @@
 {
-  "txt": "import { EndPointVO } from \"./EndPointVO\";\nimport { WarningLevel } from \"ws-module\";\n\nexport class EndPoints {\n\n\t</\n\tstatic {endpoint_name}:EndPointVO = {\n{endpoint_obj}\n\t};\n\t/>\n\t//--//\n\n}"
+  "txt": [
+    "import { EndPointVO } from \"./EndPointVO\";",
+    "import { WarningLevel } from \"ws-module\";",
+    "",
+    "export class EndPoints {",
+      "",
+      "\t</",
+      "\tstatic {endpoint_name}:EndPointVO = {",
+        "{endpoint_obj}",
+      "\t};",
+      "\t/>",
+      "\t//--//",
+      "",
+    "}"
+  ]
 }

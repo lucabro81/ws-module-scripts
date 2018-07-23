@@ -146,10 +146,10 @@ stdin.once('data', function(data) {
         // creazione dei file che devono stare dentro a /decorators
         nomi_metodi_arr.forEach((name) => {
 
-            let service_method_signal_template = fs.readFileSync('./scripts/templates/serviceMethodSignalContainer.template.txt', 'utf8');
+            let service_method_signal_template = require('./templates/serviceMethodSignalContainer.template.json').txt.join('\n');
             service_method_signal_template = service_method_signal_template.replace(re_srv_2, utils.capitalizeFirstLetter(name));
 
-            let service_method_listener_template = fs.readFileSync('./scripts/templates/onServiceMethodListener.template.txt', 'utf8');
+            let service_method_listener_template = require('./templates/onServiceMethodListener.template.json').txt.join('\n');
             service_method_listener_template = service_method_listener_template.replace(re_srv_2, utils.capitalizeFirstLetter(name));
 
             fs.writeFileSync(base_path +

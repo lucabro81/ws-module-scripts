@@ -36,7 +36,7 @@ function addProperties() {
                 let number = parseInt(val_prop);
                 let warning_levels = ["WarningLevel.SILENT", "WarningLevel.LOW", "WarningLevel.MEDIUM", "WarningLevel.HIGH"];
                 if (number >= 4 && number < 0) {
-                    number = 1;
+                    number = 1; // metto 1 di default
                 }
                 endpoint_obj[key] = warning_levels[number];
                 break;
@@ -85,9 +85,8 @@ function saveEndpoints() {
 
     // creazione della classe ts degli endpoints
 
-    let endpoints_template = require('./templates/endpoints.template.json').txt;
     let endpoints_template_result = { value: "" };
-    let endpoints_template_line_arr = endpoints_template.split('\n');
+    let endpoints_template_line_arr = require('./templates/endpoints.template.json').txt;
 
     let l = endpoints_template_line_arr.length;
     for (let j = 0; j < l; j++) {
@@ -141,7 +140,7 @@ function saveEndpoints() {
 
     // creazione dell'EndPointVO.d.ts
 
-    let vo = require('./templates/endpointvo.template.json').txt;
+    let vo = require('./templates/endpointvo.template.json').txt.join('\n');
     let body = "";
 
     for (let key in endpoint_template) {
