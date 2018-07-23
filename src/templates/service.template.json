@@ -7,7 +7,7 @@
     " //                                    //",
     "////////////////////////////////////////",
     "",
-    "import {EndPoints} from \"../../../utils/EndPoints\";",
+    "import {EndPoints} from \"{ep_class_path}\";",
     "-->import {On{nome_mtd_u}ServiceMethodListener} from \"./decorators/On{nome_mtd_u}ServiceMethodListener\"",
     "//--//",
     "-->import {{nome_mtd_u}ServiceMethodSignalContainer} from \"./decorators/{nome_mtd_u}ServiceMethodSignalContainer\";",

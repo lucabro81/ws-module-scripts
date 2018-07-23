@@ -115,6 +115,27 @@ stdin.once('data', function(data) {
             }
         }
 
+        // sostituisco il path degli endpoints...
+
+        let path_endpoints_arr = utils.path_endpoints.split("/");
+        let path_services_arr = utils.path_services.split("/");
+        let depth = "";
+
+        for (let i = 0; i < path_services_arr.length; i++) {
+            let path_service_segment = path_services_arr[i];
+            let path_endpoints_segment = (path_endpoints_arr[i]) ? path_endpoints_arr[i] : null;
+            if (path_service_segment !== path_endpoints_segment) {
+                depth += "../";
+            }
+        }
+
+        let end_point_class = (depth + utils.path_endpoints[utils.path_endpoints.length - 1]).replace("ts", "");
+
+        service_template_result.value =
+            service_template_result.value.replace(placeholders.ep_class_path, end_point_class);
+
+        // ... e salvo
+
         fs.writeFileSync(base_path +
             nome_classe + '/' + nome_classe + '.service.ts', service_template_result.value, 'utf8');
 
