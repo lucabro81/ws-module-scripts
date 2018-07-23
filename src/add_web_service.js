@@ -117,27 +117,22 @@ stdin.once('data', function(data) {
 
         // sostituisco il path degli endpoints...
 
-        let path_endpoints_arr = utils.path_endpoints.split("/");
-        let path_services_arr = utils.path_services.split("/");
+        let path_endpoints_arr = process.env.npm_package_config_endpoints.split("/");
+        let path_services_arr = process.env.npm_package_config_services.split("/");
         let depth = "";
 
         for (let i = 0; i < path_services_arr.length; i++) {
             let path_service_segment = path_services_arr[i];
             console.log("path_service_segment", path_service_segment);
-            if (!path_endpoints_arr[i]) {
-                break;
-            }
-            else {
-                let path_endpoints_segment = path_endpoints_arr[i];
-                console.log("path_endpoints_segment", path_endpoints_segment);
-                if (path_service_segment !== path_endpoints_segment) {
-                    depth += "../";
-                    console.log("depth", depth);
-                }
+            let path_endpoints_segment = (path_endpoints_arr[i]) ? path_endpoints_arr[i] : null;
+            console.log("path_endpoints_segment", path_endpoints_segment);
+            if (path_service_segment !== path_endpoints_segment) {
+                depth += "../";
+                console.log("depth", depth);
             }
         }
 
-        let end_point_class = (depth + utils.path_endpoints).replace("ts", "");
+        let end_point_class = (depth + process.env.npm_package_config_endpoints).replace("ts", "");
         console.log("end_point_class", end_point_class);
 
         service_template_result.value =
