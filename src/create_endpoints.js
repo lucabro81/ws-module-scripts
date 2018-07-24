@@ -12,7 +12,6 @@ let stdout = process.stdout;
 
 let index = 0;
 let arr_prop = Object.keys(endpoint_template);
-let endpoint_obj = {};
 let endpoints = {};
 let nome_endpoint = "";
 
@@ -23,6 +22,7 @@ function addProperties() {
     stdin.resume();
     stdout.write(key + ": ");
     stdin.once('data', function(data) {
+        let endpoint_obj = {};
         let val_prop = data.toString().trim();
 
         switch (endpoint_template[key]) {
@@ -51,19 +51,23 @@ function addProperties() {
         }
         else {
             stdin.resume();
-            stdout.write("Continuare? (S/N):");
+            stdout.write("[0]Cancellare ultimo - [1]Terminare - [2]Continuare?:");
             stdin.once('data', function(data) {
 
                 endpoints[nome_endpoint] = endpoint_obj;
 
                 let risposta = data.toString().trim();
-                if (!utils.getResponse(risposta)) {
+                if (risposta === "1") {
                     saveEndpoints();
                     process.exit();
                 }
-                else {
+                else if (risposta === "2") {
                     index = 0;
                     stdout.write("\n");
+                    addEndpoint();
+                }
+                else {
+                    delete endpoints[nome_endpoint];
                     addEndpoint();
                 }
             });
