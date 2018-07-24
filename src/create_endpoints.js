@@ -29,13 +29,13 @@ function addProperties(endpoint_obj = {}) {
                 endpoint_obj[key] = val_prop;
                 break;
             case "number":
-                if (val_prop === null) {
+                if (val_prop === undefined) {
                     val_prop = 0;
                 }
                 endpoint_obj[key] = parseInt(val_prop);
                 break;
             case "WarningLevel":
-                let number = parseInt(val_prop);
+                let number = (val_prop === undefined) ? 1 : parseInt(val_prop);
                 let warning_levels = ["WarningLevel.SILENT", "WarningLevel.LOW", "WarningLevel.MEDIUM", "WarningLevel.HIGH"];
                 if (number >= 4 && number < 0) {
                     number = 1; // metto 1 di default
