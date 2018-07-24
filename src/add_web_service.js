@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-// require("typescript-require");
-
 let utils = require("./utils");
 let placeholders = require("./placeholders");
 
@@ -37,8 +35,10 @@ function addModifiedText(nomi_metodi_arr, text, result, endpoint_arr, index_meto
         nome = nome.replace('\n', '');
         text_mod = text.replace(placeholders.re_mtd_1, nome);
         text_mod = text_mod.replace(placeholders.re_mtd_2, utils.capitalizeFirstLetter(nome));
-        text_mod = text_mod.replace(placeholders.endpoint_obj, "EndPoints." + endpoint_arr[parseInt(index_metodi_arr[index])].key);
-        text_mod = text_mod.replace(placeholders.http_method, endpoint_arr[parseInt(index_metodi_arr[index])].obj.default_method);
+        text_mod = text_mod.replace(placeholders.endpoint_obj, "EndPoints." + endpoint_arr[parseInt(index_metodi_arr[index])].key.toUpperCase());
+        text_mod = text_mod.replace(
+            placeholders.http_method,
+            utils.capitalizeFirstLetter(endpoint_arr[parseInt(index_metodi_arr[index])].obj.method.toLowerCase()));
 
         if (text_mod.includes('-->')) {
             result.value += text_mod.replace('-->', '') + "\n";
@@ -123,17 +123,17 @@ stdin.once('data', function(data) {
 
         for (let i = 0; i < path_services_arr.length; i++) {
             let path_service_segment = path_services_arr[i];
-            console.log("path_service_segment", path_service_segment);
+            // console.log("path_service_segment", path_service_segment);
             let path_endpoints_segment = (path_endpoints_arr[i]) ? path_endpoints_arr[i] : null;
-            console.log("path_endpoints_segment", path_endpoints_segment);
+            // console.log("path_endpoints_segment", path_endpoints_segment);
             if (path_service_segment !== path_endpoints_segment) {
                 depth += "../";
-                console.log("depth", depth);
+                // console.log("depth", depth);
             }
         }
 
-        let end_point_class = (depth + process.env.npm_package_config_endpoints).replace("ts", "");
-        console.log("end_point_class", end_point_class);
+        let end_point_class = (depth + process.env.npm_package_config_endpoints).replace(".ts", "");
+        // console.log("end_point_class", end_point_class);
 
         service_template_result.value =
             service_template_result.value.replace(placeholders.ep_class_path, end_point_class);
