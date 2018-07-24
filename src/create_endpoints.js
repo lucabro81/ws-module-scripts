@@ -23,19 +23,20 @@ function addProperties(endpoint_obj = {}) {
     stdout.write(key + ": ");
     stdin.once('data', function(data) {
         let val_prop = data.toString().trim();
+        console.log("val_prop", val_prop);
 
         switch (endpoint_template[key]) {
             case "string":
                 endpoint_obj[key] = val_prop;
                 break;
             case "number":
-                if (val_prop === undefined) {
+                if (val_prop === "") {
                     val_prop = 0;
                 }
                 endpoint_obj[key] = parseInt(val_prop);
                 break;
             case "WarningLevel":
-                let number = (val_prop === undefined) ? 1 : parseInt(val_prop);
+                let number = (val_prop === "") ? 1 : parseInt(val_prop);
                 let warning_levels = ["WarningLevel.SILENT", "WarningLevel.LOW", "WarningLevel.MEDIUM", "WarningLevel.HIGH"];
                 if (number >= 4 && number < 0) {
                     number = 1; // metto 1 di default
@@ -104,7 +105,7 @@ function saveEndpoints() {
     let path_no_name = path_endpoints_arr.join("/"); // forse non ha il trailing slash, verificare
     fs.writeFileSync(path_no_name + "/endpoints.json", JSON.stringify(endpoints, null, "\t"), 'utf8');
 
-    console.log("endpoints.json", JSON.stringify(endpoints, null, "\t"));
+    console.log("endpoints.json\n", JSON.stringify(endpoints, null, "\t"));
 
     // creazione della classe ts degli endpoints
 
@@ -161,7 +162,7 @@ function saveEndpoints() {
 
     fs.writeFileSync(utils.path_endpoints, endpoints_template_result.value, 'utf8');
 
-    console.log("classe endpoints", endpoints_template_result.value);
+    console.log("classe endpoints\n", endpoints_template_result.value);
 
     // creazione dell'EndPointVO.d.ts
 
@@ -180,7 +181,7 @@ function saveEndpoints() {
 
     fs.writeFileSync(path_no_name + "/EndPointVO.d.ts", vo, 'utf8');
 
-    console.log("EndPointVO.d.ts", vo);
+    console.log("EndPointVO.d.ts\n", vo);
 
 }
 
