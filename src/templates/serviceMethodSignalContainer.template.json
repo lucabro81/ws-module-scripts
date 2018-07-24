@@ -1,8 +1,7 @@
 {
   "txt":[
     "import {Signal} from \"signals\";",
-    "import {AbsDecoratedSignal} from \"../../../../core/services/Abs/AbsDecoratedSignal\";",
-    "import {ISignal} from \"../../../../core/services/Signal/ISignal\";",
+    "import {AbsDecoratedSignal, ISignal} from \"ws-module\";",
     "",
     "/**",
     " * ",

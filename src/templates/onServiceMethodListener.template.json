@@ -1,6 +1,6 @@
 {
   "txt": [
-    "import {AbsListener} from \"../../../../core/services/Listener/AbsListener\"",
+    "import {AbsListener, IListener} from \"ws-module\"",
     "",
     "export abstract class On{nome_srv_u}ServiceMethodListener extends AbsListener {",
       "",
