@@ -29,6 +29,9 @@ function addProperties(endpoint_obj = {}) {
                 endpoint_obj[key] = val_prop;
                 break;
             case "number":
+                if (val_prop === null) {
+                    val_prop = 0;
+                }
                 endpoint_obj[key] = parseInt(val_prop);
                 break;
             case "WarningLevel":
