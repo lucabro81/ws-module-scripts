@@ -23,7 +23,7 @@ function addProperties(endpoint_obj = {}) {
     stdout.write(key + ": ");
     stdin.once('data', function(data) {
         let val_prop = data.toString().trim();
-        console.log("val_prop", val_prop);
+        // console.log("val_prop", val_prop);
 
         switch (endpoint_template[key]) {
             case "string":
@@ -59,14 +59,14 @@ function addProperties(endpoint_obj = {}) {
 
                 let risposta = data.toString().trim();
 
-                console.log("risposta", risposta);
+                // console.log("risposta", risposta);
 
                 if (risposta === "1") {
 
                     // Terminare
 
                     endpoints[nome_endpoint] = endpoint_obj;
-                    console.log("endpoints", endpoints);
+                    // console.log("endpoints", endpoints);
                     saveEndpoints();
                     process.exit();
                 }
@@ -75,7 +75,7 @@ function addProperties(endpoint_obj = {}) {
                     // Continuare
 
                     endpoints[nome_endpoint] = endpoint_obj;
-                    console.log("endpoints", endpoints);
+                    // console.log("endpoints", endpoints);
                     index = 0;
                     stdout.write("\n");
                     addEndpoint();
@@ -105,7 +105,7 @@ function saveEndpoints() {
     let path_no_name = path_endpoints_arr.join("/"); // forse non ha il trailing slash, verificare
     fs.writeFileSync(path_no_name + "/endpoints.json", JSON.stringify(endpoints, null, "\t"), 'utf8');
 
-    console.log("endpoints.json\n", JSON.stringify(endpoints, null, "\t"));
+    // console.log("endpoints.json\n", JSON.stringify(endpoints, null, "\t"));
 
     // creazione della classe ts degli endpoints
 
@@ -162,7 +162,7 @@ function saveEndpoints() {
 
     fs.writeFileSync(utils.path_endpoints, endpoints_template_result.value, 'utf8');
 
-    console.log("classe endpoints\n", endpoints_template_result.value);
+    // console.log("classe endpoints\n", endpoints_template_result.value);
 
     // creazione dell'EndPointVO.d.ts
 
@@ -181,7 +181,7 @@ function saveEndpoints() {
 
     fs.writeFileSync(path_no_name + "/EndPointVO.d.ts", vo, 'utf8');
 
-    console.log("EndPointVO.d.ts\n", vo);
+    // console.log("EndPointVO.d.ts\n", vo);
 
 }
 
