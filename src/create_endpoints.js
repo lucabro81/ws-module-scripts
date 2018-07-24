@@ -54,20 +54,22 @@ function addProperties() {
             stdout.write("[0]Cancellare ultimo - [1]Terminare - [2]Continuare?:");
             stdin.once('data', function(data) {
 
-                endpoints[nome_endpoint] = endpoint_obj;
-
                 let risposta = data.toString().trim();
                 if (risposta === "1") {
+                    // Terminare
+                    endpoints[nome_endpoint] = endpoint_obj;
                     saveEndpoints();
                     process.exit();
                 }
                 else if (risposta === "2") {
+                    // Continuare
+                    endpoints[nome_endpoint] = endpoint_obj;
                     index = 0;
                     stdout.write("\n");
                     addEndpoint();
                 }
                 else {
-                    delete endpoints[nome_endpoint];
+                    // Cancellare ultimo
                     addEndpoint();
                 }
             });
@@ -86,6 +88,8 @@ function saveEndpoints() {
 
     let path_no_name = path_endpoints_arr.join("/"); // forse non ha il trailing slash, verificare
     fs.writeFileSync(path_no_name + "/endpoints.json", JSON.stringify(endpoints, null, "\t"), 'utf8');
+
+    console.log("endpoints.json", JSON.stringify(endpoints, null, "\t"));
 
     // creazione della classe ts degli endpoints
 
@@ -142,6 +146,8 @@ function saveEndpoints() {
 
     fs.writeFileSync(utils.path_endpoints, endpoints_template_result.value, 'utf8');
 
+    console.log("classe endpoints", endpoints_template_result.value);
+
     // creazione dell'EndPointVO.d.ts
 
     let vo = require('./templates/endpointvo.template.json').txt.join('\n');
@@ -158,6 +164,8 @@ function saveEndpoints() {
     vo = vo.replace(placeholders.endpoint_obj, body);
 
     fs.writeFileSync(path_no_name + "/EndPointVO.d.ts", vo, 'utf8');
+
+    console.log("EndPointVO.d.ts", vo);
 
 }
 
