@@ -15,14 +15,13 @@ let arr_prop = Object.keys(endpoint_template);
 let endpoints = {};
 let nome_endpoint = "";
 
-function addProperties() {
+function addProperties(endpoint_obj = {}) {
 
     let key = arr_prop[index];
 
     stdin.resume();
     stdout.write(key + ": ");
     stdin.once('data', function(data) {
-        let endpoint_obj = {};
         let val_prop = data.toString().trim();
 
         switch (endpoint_template[key]) {
@@ -47,7 +46,7 @@ function addProperties() {
 
         index++;
         if (index < arr_prop.length) {
-            addProperties();
+            addProperties(endpoint_obj);
         }
         else {
             stdin.resume();
