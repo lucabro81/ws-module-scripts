@@ -55,21 +55,34 @@ function addProperties() {
             stdin.once('data', function(data) {
 
                 let risposta = data.toString().trim();
+
+                console.log("risposta", risposta);
+
                 if (risposta === "1") {
+
                     // Terminare
+
                     endpoints[nome_endpoint] = endpoint_obj;
+                    console.log("endpoints", endpoints);
                     saveEndpoints();
                     process.exit();
                 }
                 else if (risposta === "2") {
+
                     // Continuare
+
                     endpoints[nome_endpoint] = endpoint_obj;
+                    console.log("endpoints", endpoints);
                     index = 0;
                     stdout.write("\n");
                     addEndpoint();
                 }
                 else {
+
                     // Cancellare ultimo
+
+                    index = 0;
+                    stdout.write("\n");
                     addEndpoint();
                 }
             });
