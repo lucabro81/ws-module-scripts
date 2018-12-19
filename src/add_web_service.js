@@ -140,7 +140,7 @@ stdin.once('data', function(data) {
 
         // ... e salvo
 
-        fs.mkdirSync(base_path + nome_classe);
+        fs.mkdirSync(base_path + nome_classe, {recursive: true});
         fs.writeFileSync(base_path +
             nome_classe + '/' + nome_classe + '.service.ts', service_template_result.value, 'utf8');
 
