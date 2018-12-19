@@ -161,7 +161,6 @@ function saveEndpoints() {
         }
     }
 
-    fs.mkdirSync(utils.path_endpoints);
     fs.writeFileSync(utils.path_endpoints, endpoints_template_result.value, 'utf8');
 
     // console.log("classe endpoints\n", endpoints_template_result.value);
