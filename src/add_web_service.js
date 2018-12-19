@@ -70,10 +70,10 @@ stdin.once('data', function(data) {
         let nomi_metodi_arr = utils.createNameArray(index_metodi_arr, endpoint_arr);
 
         // creo la cartella del service...
-        fs.mkdirSync(base_path + nome_classe);
+        // fs.mkdirSync(base_path + nome_classe);
 
         // e quella dei decorators
-        fs.mkdirSync(base_path + nome_classe + "/decorators");
+        fs.mkdirSync(base_path + nome_classe + "/decorators", {recursive: true});
 
         // popolo il service.template
         let service_template_result = {value: ""};
