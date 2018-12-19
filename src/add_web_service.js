@@ -140,6 +140,7 @@ stdin.once('data', function(data) {
 
         // ... e salvo
 
+        fs.mkdirSync(base_path + nome_classe);
         fs.writeFileSync(base_path +
             nome_classe + '/' + nome_classe + '.service.ts', service_template_result.value, 'utf8');
 
@@ -151,6 +152,8 @@ stdin.once('data', function(data) {
 
             let service_method_listener_template = require('./templates/onServiceMethodListener.template.json').txt.join('\n');
             service_method_listener_template = service_method_listener_template.replace(placeholders.re_srv_2, utils.capitalizeFirstLetter(name));
+
+            fs.mkdirSync(base_path + nome_classe + '/decorators');
 
             fs.writeFileSync(base_path +
                 nome_classe + '/decorators/' + utils.capitalizeFirstLetter(name) + 'ServiceMethodSignalContainer.ts',

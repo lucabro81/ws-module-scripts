@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-require("typescript-require");
-
 let utils = require("./utils");
 
 let fs = require('fs');

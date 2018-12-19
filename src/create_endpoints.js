@@ -103,6 +103,7 @@ function saveEndpoints() {
     // creazione del json che descrive gli endpoints
 
     let path_no_name = path_endpoints_arr.join("/"); // forse non ha il trailing slash, verificare
+    fs.mkdirSync(path_no_name);
     fs.writeFileSync(path_no_name + "/endpoints.json", JSON.stringify(endpoints, null, "\t"), 'utf8');
 
     // console.log("endpoints.json\n", JSON.stringify(endpoints, null, "\t"));
@@ -160,6 +161,7 @@ function saveEndpoints() {
         }
     }
 
+    fs.mkdirSync(utils.path_endpoints);
     fs.writeFileSync(utils.path_endpoints, endpoints_template_result.value, 'utf8');
 
     // console.log("classe endpoints\n", endpoints_template_result.value);
