@@ -5,6 +5,5 @@
   "access": "boolean",
   "refresh": "boolean",
   "retry": "number",
-  "method": "string",
-  "debounce": "number"
+  "method": "string"
 }

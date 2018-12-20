@@ -1,7 +1,7 @@
 {
   "txt": [
     "import { EndPointVO } from \"./EndPointVO\";",
-    "import { WarningLevel } from \"ws-module\";",
+    "import { WarningLevel } from \"ws-module-common\";",
     "",
     "export class EndPoints {",
       "",

@@ -18,34 +18,64 @@ let nome_endpoint = "";
 function addProperties(endpoint_obj = {}) {
 
     let key = arr_prop[index];
+    let default_str = "";
+    let default_value;
 
     stdin.resume();
-    stdout.write(key + ": ");
+    // TODO: sono un cretino...
+    switch (endpoint_template[key]) {
+        case "string":
+            if (key === 'method') {
+                default_str = "GET";
+            }
+            else {
+                default_str = "test";
+            }
+            default_value = default_str;
+            break;
+        case "number":
+            default_str = "0";
+            default_value = 0;
+            break;
+        case "WarningLevel":
+            default_str = "[0] SILENT, [1] WarningLevel.LOW - DEFAULT, [2] WarningLevel.MEDIUM, [3] WarningLevel.HIGH";
+            default_value = "WarningLevel.LOW";
+            break;
+        case "boolean":
+            default_str = "false";
+            default_value = false;
+            break;
+    }
+
+    stdout.write(key + " (" + default_str + "): ");
     stdin.once('data', function(data) {
         let val_prop = data.toString().trim();
         // console.log("val_prop", val_prop);
 
-        switch (endpoint_template[key]) {
-            case "string":
-                endpoint_obj[key] = val_prop;
-                break;
-            case "number":
-                if (val_prop === "") {
-                    val_prop = 0;
-                }
-                endpoint_obj[key] = parseInt(val_prop);
-                break;
-            case "WarningLevel":
-                let number = (val_prop === "") ? 1 : parseInt(val_prop);
-                let warning_levels = ["WarningLevel.SILENT", "WarningLevel.LOW", "WarningLevel.MEDIUM", "WarningLevel.HIGH"];
-                if (number >= 4 && number < 0) {
-                    number = 1; // metto 1 di default
-                }
-                endpoint_obj[key] = warning_levels[number];
-                break;
-            case "boolean":
-                endpoint_obj[key] = val_prop.toLowerCase() === 'true'; // TODO: controllo dato
-                break;
+        if (val_prop === "") {
+            endpoint_obj[key] = default_value;
+        }
+        else {
+            // TODO: ... sono un cretino
+            switch (endpoint_template[key]) {
+                case "string":
+                    endpoint_obj[key] = val_prop;
+                    break;
+                case "number":
+                    endpoint_obj[key] = parseInt(val_prop);
+                    break;
+                case "WarningLevel":
+                    let number = parseInt(val_prop);
+                    let warning_levels = ["WarningLevel.SILENT", "WarningLevel.LOW", "WarningLevel.MEDIUM", "WarningLevel.HIGH"];
+                    if (number >= 4 && number < 0) {
+                        number = 1; // metto 1 di default
+                    }
+                    endpoint_obj[key] = warning_levels[number];
+                    break;
+                case "boolean":
+                    endpoint_obj[key] = val_prop.toLowerCase() === 'true'; // TODO: controllo dato
+                    break;
+            }
         }
 
         index++;
